@@ -27,10 +27,7 @@
         <section class="registration-section">
             <h1>Contest Registration</h1>
             
-            <form id="registrationForm" class="registration-form" 
-                action="https://docs.google.com/forms/d/e/1FAIpQLSdhUYnroUowF7XUQ_Jc48Y-qt3infdXFaFw2dhZA/formResponse" 
-                method="POST" target="_self" enctype="multipart/form-data">
-
+            <form id="registrationForm" class="registration-form" method="POST" enctype="multipart/form-data">
                 <div class="form-container">
                     <!-- Registration Form Section -->
                     <div class="form-section">
@@ -83,7 +80,7 @@
                             <div class="form-row">
                                 <div class="form-column">
                                     <label for="id_proof">Upload College ID Proof</label>
-                                    <input type="file" id="id_proof" name="id_proof" accept="image/*" required>
+                                    <input type="file" id="id_proof" name="entry.666666666" accept="image/*" required>
                                     <div id="filePreview" class="file-preview"></div>
                                 </div>
                             </div>
@@ -112,24 +109,7 @@
                 </div>
             </form>
 
-            <script>
-                document.getElementById('registrationForm').addEventListener('submit', function(event) {
-                    event.preventDefault();
-                    
-                    // Show loading state
-                    const submitBtn = this.querySelector('.submit-btn');
-                    submitBtn.textContent = 'Submitting...';
-                    submitBtn.disabled = true;
-
-                    // Submit the form
-                    this.submit();
-
-                    // Redirect to a thank-you page
-                    setTimeout(() => {
-                        window.location.href = 'thank-you.html';
-                    }, 1000);
-                });
-            </script>
+            <script src="form-handler.js"></script>
         </section>
     </main>
 
