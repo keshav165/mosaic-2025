@@ -27,57 +27,57 @@
         <section class="registration-section">
             <h1>Contest Registration</h1>
             
-            <form id="registrationForm" class="registration-form" action="https://formkeep.com/f/9374e4646033" method="POST" enctype="multipart/form-data">
+            <form id="registrationForm" class="registration-form" 
+                action="https://docs.google.com/forms/d/e/1FAIpQLSdhUYnroUowF7XUQ_Jc48Y-qt3infdXFaFw2dhZA/formResponse" 
+                method="POST" target="_self" enctype="multipart/form-data">
+
                 <div class="form-container">
                     <!-- Registration Form Section -->
                     <div class="form-section">
-                        <!-- Contest Details -->
                         <div class="form-group">
                             <h2>Contest Details</h2>
                             <div class="form-row">
                                 <div class="form-column">
                                     <label for="college_name">College Name</label>
-                                    <input type="text" id="college_name" name="college_name" required>
+                                    <input type="text" id="college_name" name="entry.123456789" required>
                                 </div>
                                 <div class="form-column">
                                     <label for="team_name">Team Name</label>
-                                    <input type="text" id="team_name" name="team_name" required>
+                                    <input type="text" id="team_name" name="entry.987654321" required>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Team Leader Details -->
                         <div class="form-group">
                             <h2>Team Leader Details</h2>
                             <div class="form-row">
                                 <div class="form-column">
                                     <label for="leader_name">Team Leader Name</label>
-                                    <input type="text" id="leader_name" name="leader_name" required>
+                                    <input type="text" id="leader_name" name="entry.111111111" required>
                                 </div>
                                 <div class="form-column">
                                     <label for="leader_phone">Team Leader Phone Number</label>
-                                    <input type="tel" id="leader_phone" name="leader_phone" required>
+                                    <input type="tel" id="leader_phone" name="entry.222222222" required>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-column">
                                     <label for="leader_email">Team Leader Email</label>
-                                    <input type="email" id="leader_email" name="leader_email" required>
+                                    <input type="email" id="leader_email" name="entry.333333333" required>
                                 </div>
                                 <div class="form-column">
                                     <label for="hear_about">How did you hear about us?</label>
-                                    <select id="hear_about" name="hear_about" required>
+                                    <select id="hear_about" name="entry.444444444" required>
                                         <option value="">Select Option</option>
-                                        <option value="instagram">Instagram</option>
-                                        <option value="friend">Friend</option>
-                                        <option value="college">College</option>
-                                        <option value="other">Other</option>
+                                        <option value="Instagram">Instagram</option>
+                                        <option value="Friend">Friend</option>
+                                        <option value="College">College</option>
+                                        <option value="Other">Other</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- ID Proof -->
                         <div class="form-group">
                             <h2>ID Proof</h2>
                             <div class="form-row">
@@ -89,13 +89,12 @@
                             </div>
                         </div>
 
-                        <!-- Payment Details -->
                         <div class="form-group">
                             <h2>Payment Details</h2>
                             <div class="form-row">
                                 <div class="form-column">
                                     <label for="transaction_id">Transaction ID</label>
-                                    <input type="text" id="transaction_id" name="transaction_id" required>
+                                    <input type="text" id="transaction_id" name="entry.555555555" required>
                                 </div>
                             </div>
                         </div>
@@ -103,27 +102,12 @@
                         <button type="submit" class="submit-btn">Submit Registration</button>
                     </div>
 
-                    <!-- QR Code Section -->
                     <div class="qr-section">
                         <h2>Payment Details</h2>
                         <p class="payment-info">Please make payment of ₹169 using the QR code below</p>
                         <div class="qr-container">
                             <img src="images/payment-qr.jpg?v=1" alt="Payment QR Code" class="payment-qr">
                         </div>
-                        <br>
-                        <p><b>For any payment related queries contact:</b></p><br>
-                        <p>Varad Deshpande</p>
-                        <p>Phone no: 7666528165</p>
-                        <br>
-                        <p><b>Student Coordinators:</b></p>
-                        <p>Yashwanth</p>
-                        <p>Phone no: 9676556017</p>
-                        <p>Mohana</p>
-                        <p>Phone no: 7330837021</p>
-                        <br>
-                        <p><b>Faculty Coordinator:</b></p>
-                        <p>Rahul Das</p>
-                        <p>Phone no: 9676338610</p>
                     </div>
                 </div>
             </form>
@@ -134,36 +118,17 @@
                     
                     // Show loading state
                     const submitBtn = this.querySelector('.submit-btn');
-                    const originalText = submitBtn.textContent;
                     submitBtn.textContent = 'Submitting...';
                     submitBtn.disabled = true;
 
-                    // Submit the form directly
+                    // Submit the form
                     this.submit();
 
-                    // Redirect to thank you page after a short delay
+                    // Redirect to a thank-you page
                     setTimeout(() => {
                         window.location.href = 'thank-you.html';
                     }, 1000);
                 });
-
-                // File upload preview
-                const idProofInput = document.getElementById('id_proof');
-                const filePreview = document.getElementById('filePreview');
-
-                if (idProofInput) {
-                    idProofInput.addEventListener('change', function(e) {
-                        const file = this.files[0];
-                        if (file) {
-                            const reader = new FileReader();
-                            reader.onload = function(e) {
-                                filePreview.src = e.target.result;
-                                filePreview.style.display = 'block';
-                            };
-                            reader.readAsDataURL(file);
-                        }
-                    });
-                }
             </script>
         </section>
     </main>
