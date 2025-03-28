@@ -61,6 +61,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Mobile number validation
+    function validateMobileAndRedirect() {
+        const mobileInput = document.getElementById('mobileNumber');
+        const mobileNumber = mobileInput.value.trim();
+        
+        // Validate mobile number format
+        if (!mobileNumber.match(/^[6-9][0-9]{9}$/)) {
+            alert('Please enter a valid Indian mobile number starting with 6-9');
+            return;
+        }
+
+        // Redirect to registration page
+        window.location.href = 'register.html';
+    }
+
     // Rules page handling
     const rulePhoneInput = document.getElementById('rulePhone');
     const acceptRulesButton = document.getElementById('acceptRules');
@@ -71,13 +86,28 @@ document.addEventListener('DOMContentLoaded', function() {
             acceptRulesButton.disabled = !this.value.trim();
         });
 
-        acceptRulesButton.addEventListener('click', function() {
-            if (rulePhoneInput.value.trim()) {
-                // Store the phone number in localStorage
-                localStorage.setItem('acceptedRulesPhone', rulePhoneInput.value);
-                // Redirect to registration page
-                window.location.href = 'register.html';
-            }
-        });
+        acceptRulesButton.addEventListener('click', validateMobileAndRedirect);
     }
+});
+
+// Scroll to top button functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollBtn = document.getElementById('scrollBtn');
+    
+    // Show/hide scroll button based on scroll position
+    window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 200) {
+            scrollBtn.style.display = 'block';
+        } else {
+            scrollBtn.style.display = 'none';
+        }
+    });
+
+    // Smooth scroll to top
+    scrollBtn.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 });

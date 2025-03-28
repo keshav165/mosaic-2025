@@ -25,6 +25,7 @@
     <main>
         <section class="rules-section">
             <h1>Contest Rules & Guidelines</h1>
+            
             <div class="rules-container">
                 <div class="rules-list">
                     <li>THE SHORT FILM SHOULD BE OF UPTO MAXIMUM 20 MINUTES OF LENGTH AND MINIMUM OF 8 MINUTES, INCLUDING THE CREDITS.</li>
@@ -46,13 +47,17 @@
         </section>
     </main>
 
-    <footer class="footer-section">
+    <footer>
         <div class="footer-content">
-            <h3>Contact Us</h3>
-            <div class="social-links">
-                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Phone: +91 7666528165</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/mosaic.gcet?igshid=MzV5eXZvMnVlNjN4" class="social-icon">Instagram</a>
+                </div>
             </div>
         </div>
     </footer>
@@ -60,17 +65,14 @@
     <script>
         function validateMobileAndRedirect() {
             const mobileInput = document.getElementById('mobileNumber');
-            const mobileNumber = mobileInput.value;
+            const mobileNumber = mobileInput.value.trim();
             
-            // Validate mobile number
+            // Validate mobile number format
             if (!mobileNumber.match(/^[6-9][0-9]{9}$/)) {
-                alert('Please enter a valid 10-digit mobile number starting with 6-9');
+                alert('Please enter a valid Indian mobile number starting with 6-9');
                 return;
             }
-            
-            // Store mobile number in localStorage
-            localStorage.setItem('userMobileNumber', mobileNumber);
-            
+
             // Redirect to registration page
             window.location.href = 'register.html';
         }
