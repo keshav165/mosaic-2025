@@ -14,40 +14,28 @@ document.addEventListener('DOMContentLoaded', function() {
             try {
                 // Get form data
                 const formData = new FormData(this);
-                const formObject = {};
-                const files = {};
                 
                 // Convert FormData to object
+                const formObject = {};
                 for (let [key, value] of formData.entries()) {
                     if (value instanceof File) {
-                        // Handle file upload
-                        files[key] = value;
                         formObject[key] = {
                             name: value.name,
                             type: value.type,
                             size: value.size
                         };
                     } else {
-                        // Handle regular form fields
                         formObject[key] = value;
                     }
                 }
 
-                // Send data to API endpoint
-                const response = await fetch('https://api.github.com/repos/keshav165/mosaic-2025/dispatches', {
+                // Send data to cloud function
+                const response = await fetch('https://us-central1-your-project-id.cloudfunctions.net/submitForm', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Authorization': `token ${process.env.GITHUB_TOKEN}`
+                        'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({
-                        event_type: 'form_submission',
-                        client_payload: {
-                            formData: formObject,
-                            files: files
-                        }
-                    })
+                    body: JSON.stringify(formObject)
                 });
 
                 if (!response.ok) {

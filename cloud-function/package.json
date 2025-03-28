@@ -1,0 +1,9 @@
+{
+  "name": "mosaic-form-handler",
+  "version": "1.0.0",
+  "description": "Cloud Function to handle form submissions for Mosaic 2025",
+  "main": "index.js",
+  "dependencies": {
+    "googleapis": "^112.0.0"
+  }
+}
