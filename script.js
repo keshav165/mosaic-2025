@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const formData = new FormData(this);
                 
                 // Send data to Google Forms
-                const response = await fetch('https://docs.google.com/forms/d/e/1FAIpQLSdueREbCkjabd5u0pqCSUWnmBoc3HK6qPYuJSAlwaTP-6SxgA/formResponse', {
+                const response = await fetch('https://docs.google.com/forms/u/0/d/e/1FAIpQLSdueREbCkjabd5u0pqCSUWnmBoc3HK6qPYuJSAlwaTP-6SxgA/formResponse', {
                     method: 'POST',
                     body: formData
                 });
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // File upload preview
-    const idProofInput = document.getElementById('idProof');
+    const idProofInput = document.getElementById('entry.1473213429');
     const filePreview = document.getElementById('filePreview');
 
     if (idProofInput) {
