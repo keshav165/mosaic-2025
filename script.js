@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Registration form handling
     const registrationForm = document.getElementById('registrationForm');
     if (registrationForm) {
-        registrationForm.addEventListener('submit', async function(e) {
+        registrationForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
             // Show loading state
@@ -12,32 +12,13 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.textContent = 'Submitting...';
             submitBtn.disabled = true;
 
-            try {
-                // Create FormData object
-                const formData = new FormData(this);
+            // Submit the form directly
+            this.submit();
 
-                // Send data to Google Forms
-                const response = await fetch('https://docs.google.com/forms/d/e/1FAIpQLSdueREbCkjabd5u0pqCSUWnmBoc3HK6qPYuJSAlwaTP-6SxgA/formResponse', {
-                    method: 'POST',
-                    body: formData,
-                    mode: 'cors',
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-
-                if (response.ok) {
-                    // Redirect to thank you page
-                    window.location.href = 'thank-you.html';
-                } else {
-                    throw new Error('Form submission failed');
-                }
-            } catch (error) {
-                // Show error message
-                alert('Error: ' + error.message);
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }
+            // Redirect to thank you page after a short delay
+            setTimeout(() => {
+                window.location.href = 'thank-you.html';
+            }, 1000);
         });
     }
 
