@@ -85,24 +85,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
         acceptRulesButton.addEventListener('click', validateMobileAndRedirect);
     }
-
-    // Scroll to top button functionality
-    const scrollBtn = document.getElementById('scrollBtn');
-    
-    // Show/hide scroll button based on scroll position
-    window.addEventListener('scroll', function() {
-        if (window.pageYOffset > 200) {
-            scrollBtn.style.display = 'block';
-        } else {
-            scrollBtn.style.display = 'none';
-        }
-    });
-
-    // Smooth scroll to top
-    scrollBtn.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
 });
