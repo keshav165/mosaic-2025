@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // File upload preview
-    const idProofInput = document.getElementById('idProof');
+    const idProofInput = document.getElementById('id_proof');
     const filePreview = document.getElementById('filePreview');
 
     if (idProofInput) {
