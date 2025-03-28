@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mosaic 2025 - Rules and Guidelines</title>
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Mosaic 2025</h1>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="rules.html" class="active">Rules</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="rules-section">
+            <h1>Contest Rules & Guidelines</h1>
+            <div class="rules-container">
+                <div class="rules-list">
+                    <li>THE SHORT FILM SHOULD BE OF UPTO MAXIMUM 20 MINUTES OF LENGTH AND MINIMUM OF 8 MINUTES, INCLUDING THE CREDITS.</li>
+                    <li>ALL THE SHORT FILMS CAN BE OF ANY LANGUAGE BUT MUST BE SUBTITLED IN ENGLISH.</li>
+                    <li>THE COLLEGE RESERVES THE RIGHTS TO PUBLISH THE SHORTLISTED CONTENT IN ITS OFFICIAL SOCIAL MEDIA CHANNELS WITH SUITABLE CREDITS.</li>
+                    <li>OUT OF ALL SUBMISSIONS, ONLY THE BEST FEW ARE SELECTED FOR SCREENING ON 15TH APRIL 2025.</li>
+                    <li>REGISTRATION FEE OF 169/- PER TEAM IS MANDATORY AND IS NO-REFUNDABLE. THIS REGISTRATION FEE IS ONLY FOR THE SHORT FILM CONTEST.</li>
+                    <li>NO OBSCENITY IN ANY FORM OF AMBIGUOUS OR PROVOCATIVE DIALOGUE AND ATTIRE WILL BE TOLERATED.</li>
+                    <li>SUBMISSIONS CONTAINING COPYRIGHTED MATERIAL OR PLAGIARIZED CONTENT WILL BE EXCLUDED FROM CONSIDERATION.</li>
+                    <li>LAST DATE FOR SUBMISSION OF SHORT FILM IS 10TH APRIL 2025, 10AM.</li>
+                    <li>THE ORGANISING COMMITTEE HOLDS THE ULTIMATE AUTHORITY ON ALL DECISIONS.</li>
+                </div>
+                <div class="mobile-input">
+                    <label for="mobileNumber">Mobile Number:</label>
+                    <input type="tel" id="mobileNumber" name="mobileNumber" placeholder="Enter your mobile number" required pattern="[6-9][0-9]{9}">
+                </div>
+                <button type="button" class="accept-btn" onclick="validateMobileAndRedirect()">Accept Rules & Register</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="footer-content">
+            <h3>Contact Us</h3>
+            <div class="social-links">
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function validateMobileAndRedirect() {
+            const mobileInput = document.getElementById('mobileNumber');
+            const mobileNumber = mobileInput.value;
+            
+            // Validate mobile number
+            if (!mobileNumber.match(/^[6-9][0-9]{9}$/)) {
+                alert('Please enter a valid 10-digit mobile number starting with 6-9');
+                return;
+            }
+            
+            // Store mobile number in localStorage
+            localStorage.setItem('userMobileNumber', mobileNumber);
+            
+            // Redirect to registration page
+            window.location.href = 'register.html';
+        }
+    </script>
+</body>
+</html>
