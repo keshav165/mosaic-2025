@@ -131,15 +131,18 @@
             <!-- Hidden iframe for form submission -->
             <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
             <script>
-                const iframe = document.getElementById('hidden_iframe');
-                iframe.onload = function() {
-                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    if (iframeDoc.body.textContent === "Thank you for registering!") {
-                        window.location.href = 'success.html';
-                    } else {
-                        alert('Error submitting form');
-                    }
-                };
+                function submitForm() {
+                    const iframe = document.getElementById('hidden_iframe');
+                    iframe.onload = function() {
+                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                        if (iframeDoc.body.textContent === "Thank you for registering!") {
+                            window.location.href = 'success.html';
+                        } else {
+                            alert('Error submitting form');
+                        }
+                    };
+                    return true;
+                }
             </script>
         </section>
     </main>

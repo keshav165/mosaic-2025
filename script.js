@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const iframe = document.getElementById('hidden_iframe');
                 try {
                     const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    if (iframeDoc.body.textContent === "Thank you for registering!") {
+                    if (iframeDoc.body.textContent.includes("Thank you for registering!")) {
                         window.location.href = 'thank-you.html';
                     } else {
                         alert('Error submitting form');
