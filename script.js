@@ -12,23 +12,25 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.textContent = 'Submitting...';
             submitBtn.disabled = true;
 
-            // Create FormData object
-            const formData = new FormData(this);
-
             try {
-                // Send data to backend
-                const response = await fetch('https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec', {
+                // Send data to Formspree
+                const formData = new FormData(this);
+                
+                // Add email field for Formspree
+                formData.append('_replyto', formData.get('email'));
+                
+                const response = await fetch('https://formspree.io/f/xldjwgwj', {
                     method: 'POST',
                     body: formData
                 });
 
                 const result = await response.json();
 
-                if (result.status === 'success') {
+                if (response.ok) {
                     // Redirect to thank you page
                     window.location.href = 'thank-you.html';
                 } else {
-                    throw new Error(result.message);
+                    throw new Error('Form submission failed');
                 }
             } catch (error) {
                 // Show error message
@@ -49,12 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    filePreview.innerHTML = `
-                        <div class="preview-container">
-                            <img src="${e.target.result}" alt="Preview" class="preview-image">
-                            <p class="preview-filename">${file.name}</p>
-                        </div>
-                    `;
+                    filePreview.src = e.target.result;
+                    filePreview.style.display = 'block';
                 };
                 reader.readAsDataURL(file);
             }
@@ -82,16 +80,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (rulePhoneInput && acceptRulesButton) {
         rulePhoneInput.addEventListener('input', function() {
-            // Enable/disable button based on phone number input
             acceptRulesButton.disabled = !this.value.trim();
         });
 
         acceptRulesButton.addEventListener('click', validateMobileAndRedirect);
     }
-});
 
-// Scroll to top button functionality
-document.addEventListener('DOMContentLoaded', function() {
+    // Scroll to top button functionality
     const scrollBtn = document.getElementById('scrollBtn');
     
     // Show/hide scroll button based on scroll position
