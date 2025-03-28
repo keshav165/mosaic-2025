@@ -1,47 +1,5 @@
-// Form submission handling
+// File upload preview
 document.addEventListener('DOMContentLoaded', function() {
-    // Registration form handling
-    const registrationForm = document.getElementById('registrationForm');
-    if (registrationForm) {
-        registrationForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            // Show loading state
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Submitting...';
-            submitBtn.disabled = true;
-
-            try {
-                // Send data to Formspree
-                const formData = new FormData(this);
-                
-                // Add email field for Formspree
-                formData.append('_replyto', formData.get('email'));
-                
-                const response = await fetch('https://formspree.io/f/xldjwgwj', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    // Redirect to thank you page
-                    window.location.href = 'thank-you.html';
-                } else {
-                    throw new Error('Form submission failed');
-                }
-            } catch (error) {
-                // Show error message
-                alert('Error: ' + error.message);
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }
-        });
-    }
-
-    // File upload preview
     const idProofInput = document.getElementById('idProof');
     const filePreview = document.getElementById('filePreview');
 
