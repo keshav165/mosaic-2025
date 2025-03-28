@@ -12,37 +12,28 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.textContent = 'Submitting...';
             submitBtn.disabled = true;
 
-            // Create a hidden iframe for form submission
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
+            // Create FormData object
+            const formData = new FormData(this);
 
-            // Create a new form
-            const tempForm = document.createElement('form');
-            tempForm.method = 'POST';
-            tempForm.action = 'https://docs.google.com/forms/d/e/1FAIpQLSdueREbCkjabd5u0pqCSUWnmBoc3HK6qPYuJSAlwaTP-6SxgA/formResponse';
-            tempForm.target = iframe.name;
-
-            // Copy all form fields
-            Array.from(this.elements).forEach(element => {
-                if (element.type !== 'submit' && element.type !== 'button') {
-                    const newElement = element.cloneNode(true);
-                    tempForm.appendChild(newElement);
+            // Send data to Google Forms
+            fetch('https://docs.google.com/forms/d/e/1FAIpQLSdueREbCkjabd5u0pqCSUWnmBoc3HK6qPYuJSAlwaTP-6SxgA/formResponse', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Redirect to thank you page
+                    window.location.href = 'thank-you.html';
+                } else {
+                    throw new Error('Form submission failed');
                 }
+            })
+            .catch(error => {
+                // Show error message
+                alert('Error: ' + error.message);
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
             });
-
-            // Submit the form
-            document.body.appendChild(tempForm);
-            tempForm.submit();
-
-            // Clean up
-            tempForm.remove();
-            iframe.remove();
-
-            // Redirect to thank you page after a short delay
-            setTimeout(() => {
-                window.location.href = 'thank-you.html';
-            }, 1000); // 1 second delay
         });
     }
 

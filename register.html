@@ -27,7 +27,7 @@
         <section class="registration-section">
             <h1>Contest Registration</h1>
             
-            <form id="registrationForm" class="registration-form" action="https://docs.google.com/forms/d/e/1FAIpQLSdueREbCkjabd5u0pqCSUWnmBoc3HK6qPYuJSAlwaTP-6SxgA/formResponse" method="POST" enctype="multipart/form-data" target="hidden_iframe">
+            <form id="registrationForm" class="registration-form" action="https://docs.google.com/forms/d/e/1FAIpQLSdueREbCkjabd5u0pqCSUWnmBoc3HK6qPYuJSAlwaTP-6SxgA/formResponse" method="POST" enctype="multipart/form-data">
                 <div class="form-container">
                     <!-- Registration Form Section -->
                     <div class="form-section">
@@ -152,7 +152,25 @@
     </footer>
 
     <script>
-        // Removed the event listener to allow the form to submit directly to Formspree
+        const form = document.getElementById('registrationForm');
+        const iframe = document.getElementById('hidden_iframe');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', form.action, true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Redirect to a success page or display a success message
+                    window.location.href = 'success.html';
+                } else {
+                    // Display an error message
+                    alert('Error submitting form');
+                }
+            };
+            xhr.send(formData);
+        });
     </script>
 </body>
 </html>
