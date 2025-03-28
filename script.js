@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Registration form handling
     const registrationForm = document.getElementById('registrationForm');
     if (registrationForm) {
-        registrationForm.addEventListener('submit', function(e) {
+        registrationForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Show loading state
@@ -12,27 +12,32 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.textContent = 'Submitting...';
             submitBtn.disabled = true;
 
-            // Submit the form to the hidden iframe
-            this.submit();
+            try {
+                // Create FormData object
+                const formData = new FormData(this);
 
-            // Check iframe content after a short delay
-            setTimeout(() => {
-                const iframe = document.getElementById('hidden_iframe');
-                try {
-                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    if (iframeDoc.body.textContent.includes("Thank you for registering!")) {
-                        window.location.href = 'thank-you.html';
-                    } else {
-                        alert('Error submitting form');
-                        submitBtn.textContent = originalText;
-                        submitBtn.disabled = false;
+                // Send data to Google Forms
+                const response = await fetch('https://docs.google.com/forms/d/e/1FAIpQLSdueREbCkjabd5u0pqCSUWnmBoc3HK6qPYuJSAlwaTP-6SxgA/formResponse', {
+                    method: 'POST',
+                    body: formData,
+                    mode: 'cors',
+                    headers: {
+                        'Accept': 'application/json'
                     }
-                } catch (error) {
-                    alert('Error: Unable to verify form submission');
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
+                });
+
+                if (response.ok) {
+                    // Redirect to thank you page
+                    window.location.href = 'thank-you.html';
+                } else {
+                    throw new Error('Form submission failed');
                 }
-            }, 1000);
+            } catch (error) {
+                // Show error message
+                alert('Error: ' + error.message);
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
         });
     }
 

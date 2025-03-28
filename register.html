@@ -27,7 +27,7 @@
         <section class="registration-section">
             <h1>Contest Registration</h1>
             
-            <form id="registrationForm" class="registration-form" action="https://docs.google.com/forms/d/e/1FAIpQLSdueREbCkjabd5u0pqCSUWnmBoc3HK6qPYuJSAlwaTP-6SxgA/formResponse" method="POST" enctype="multipart/form-data" target="hidden_iframe">
+            <form id="registrationForm" class="registration-form" action="https://docs.google.com/forms/d/e/1FAIpQLSdueREbCkjabd5u0pqCSUWnmBoc3HK6qPYuJSAlwaTP-6SxgA/formResponse" method="POST" enctype="multipart/form-data" target="_self">
                 <div class="form-container">
                     <!-- Registration Form Section -->
                     <div class="form-section">
@@ -128,21 +128,23 @@
                 </div>
             </form>
 
-            <!-- Hidden iframe for form submission -->
-            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"></iframe>
             <script>
-                function submitForm() {
-                    const iframe = document.getElementById('hidden_iframe');
-                    iframe.onload = function() {
-                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                        if (iframeDoc.body.textContent === "Thank you for registering!") {
-                            window.location.href = 'success.html';
-                        } else {
-                            alert('Error submitting form');
+                document.getElementById('registrationForm').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    const formData = new FormData(this);
+                    fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        mode: 'cors',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'multipart/form-data'
                         }
-                    };
-                    return true;
-                }
+                    })
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch(error => console.error(error));
+                });
             </script>
         </section>
     </main>
